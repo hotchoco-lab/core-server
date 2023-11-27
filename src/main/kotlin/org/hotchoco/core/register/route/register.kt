@@ -4,6 +4,7 @@ import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.hotchoco.core.register.model.TermModel
+import org.hotchoco.core.register.response.AccountResponse
 import org.hotchoco.core.register.response.NewResponse
 import java.util.UUID
 
@@ -24,16 +25,22 @@ fun Route.routeRegister() {
                 header("Kakao", "Talk")
             }
 
-            call.respond(NewResponse(
-                terms = listOf<TermModel>(
-                    TermModel(
-                        title = "테스트 옵션입니다.",
-                        description = "",
-                        code = "TEST",
-                        essential = true
+            call.respond(
+                AccountResponse(
+                    status = 0,
+                    view = "phone-number",
+                    viewData = NewResponse(
+                        terms = listOf(
+                            TermModel(
+                                title = "테스트 옵션입니다.",
+                                description = "",
+                                code = "TEST",
+                                essential = true
+                            )
+                        )
                     )
                 )
-            ))
+            )
         }
     }
 }

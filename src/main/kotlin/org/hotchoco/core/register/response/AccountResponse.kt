@@ -1,11 +1,10 @@
 package org.hotchoco.core.register.response
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.JsonElement
 
 @Serializable
-data class AccountResponse(
+data class AccountResponse<T>(
     val status: Int,
     val view: String,
-    val viewData: JsonElement,
+    val viewData: T,
 )
