@@ -28,7 +28,7 @@ fun Route.routeRegister() {
             call.respond(
                 AccountResponse(
                     status = 0,
-                    view = "phone-number",
+                    view = "terms",
                     viewData = NewResponse(
                         terms = listOf(
                             TermModel(
