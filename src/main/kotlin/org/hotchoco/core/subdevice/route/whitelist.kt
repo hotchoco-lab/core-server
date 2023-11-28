@@ -8,6 +8,8 @@ import org.hotchoco.core.subdevice.response.SubDeviceWhitelistResponse
 fun Route.routeSubDeviceWhitelist() {
     route("/android/account") {
         get("/allowlist.json") {
+            application.environment.log.debug(application.environment.rootPath)
+
             val modelName = call.parameters["model_name"]
 
             val alwaysAllow = application.environment.config.property("hotchoco.subdevice.alwaysAllow")
