@@ -5,17 +5,16 @@ import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
-import io.ktor.util.*
-import org.hotchoco.core.helper.CoreHelper
+import kotlinx.serialization.Serializable
 import org.hotchoco.core.register.model.RegisterStage
+import org.hotchoco.core.session.headerFix
 import java.io.File
 
+@Serializable
 data class RegisterSession(
     val uuid: String,
-    val stage: RegisterStage
+    var stage: RegisterStage
 )
 
 fun Application.configureSecurity() {
@@ -41,9 +40,6 @@ fun Application.configureSecurity() {
     }
 
     install(Sessions) {
-        header<RegisterSession>("Set-SS", CoreHelper.registerSessionStorage) {
-            transform()
-        }
-        header<RegisterSession>("SS", CoreHelper.registerSessionStorage)
+        headerFix<RegisterSession>("SS", directorySessionStorage(File(".sessions"))) { }
     }
 }
