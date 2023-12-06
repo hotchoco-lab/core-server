@@ -8,6 +8,15 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
+import io.ktor.util.*
+import org.hotchoco.core.helper.CoreHelper
+import org.hotchoco.core.register.model.RegisterStage
+import java.io.File
+
+data class RegisterSession(
+    val uuid: String,
+    val stage: RegisterStage
+)
 
 fun Application.configureSecurity() {
     // Please read the jwt property from the config file if you are using EngineMain
@@ -30,10 +39,11 @@ fun Application.configureSecurity() {
             }
         }
     }
-    data class MySession(val count: Int = 0)
+
     install(Sessions) {
-        cookie<MySession>("MY_SESSION") {
-            cookie.extensions["SameSite"] = "lax"
+        header<RegisterSession>("Set-SS", CoreHelper.registerSessionStorage) {
+            transform()
         }
+        header<RegisterSession>("SS", CoreHelper.registerSessionStorage)
     }
 }
