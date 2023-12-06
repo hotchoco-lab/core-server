@@ -52,6 +52,15 @@ fun Route.routeRegister() {
         }
 
         post("/terms") {
+            call.response.apply {
+                header(
+                    "C",
+                    UUID.randomUUID().toString()
+                )
+
+                header("Kakao", "Talk")
+            }
+
             val session = call.sessions.get<RegisterSession>()
                 ?: return@post call.respond(
                     AccountResponse<Unit>(
