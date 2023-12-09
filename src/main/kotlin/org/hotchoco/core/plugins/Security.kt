@@ -6,14 +6,9 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.sessions.*
-import org.hotchoco.core.register.model.RegisterLevel
+import org.hotchoco.core.register.model.RegisterSession
 import org.hotchoco.core.session.headerFix
 import java.io.File
-
-data class RegisterSession(
-    val uuid: String,
-    val level: RegisterLevel
-)
 
 fun Application.configureSecurity() {
     // Please read the jwt property from the config file if you are using EngineMain
