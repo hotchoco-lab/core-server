@@ -7,4 +7,5 @@ fun Route.routeRegister() {
     routeRegisterNew()
     routeRegisterTerms()
     routeRegisterPhoneNumber()
+    routeRegisterPasscode()
 }
