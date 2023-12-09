@@ -36,7 +36,6 @@ fun Route.routeRegister() {
             call.sessions.set(
                 RegisterSession(
                     uuid = UUID.randomUUID().toString(),
-                    stage = RegisterStage.NEW
                 )
             )
 
@@ -61,6 +60,8 @@ fun Route.routeRegister() {
                 header("Kakao", "Talk")
             }
 
+            application.log.debug("session: {}", call.sessions.get<RegisterSession>())
+
             val session = call.sessions.get<RegisterSession>()
                 ?: return@post call.respond(
                     AccountResponse<Unit>(
@@ -78,10 +79,6 @@ fun Route.routeRegister() {
                         )
                     )
                 )
-
-            session.apply {
-                stage = RegisterStage.TERMS
-            }
 
             call.respond(
                 AccountResponse(

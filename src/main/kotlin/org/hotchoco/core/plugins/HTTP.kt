@@ -23,15 +23,18 @@ fun Application.configureHTTP() {
             minimumSize(1024) // condition
         }
     }
-    install(CORS) {
-        allowMethod(HttpMethod.Options)
-        allowMethod(HttpMethod.Put)
-        allowMethod(HttpMethod.Delete)
-        allowMethod(HttpMethod.Patch)
-        allowHeader(HttpHeaders.Authorization)
-        allowHeader("MyCustomHeader")
-        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
-    }
+//    install(CORS) {
+//        allowMethod(HttpMethod.Options)
+//        allowMethod(HttpMethod.Put)
+//        allowMethod(HttpMethod.Delete)
+//        allowMethod(HttpMethod.Patch)
+//        allowHeader(HttpHeaders.Authorization)
+//        allowHeader("Set-SS")
+//        exposeHeader("Set-SS")
+//        allowHeader("SS")
+//        exposeHeader("SS")
+//        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+//    }
     install(DefaultHeaders) {
         header("X-Engine", "Ktor") // will send this header with each response
     }

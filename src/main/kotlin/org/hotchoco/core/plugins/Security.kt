@@ -11,10 +11,8 @@ import org.hotchoco.core.register.model.RegisterStage
 import org.hotchoco.core.session.headerFix
 import java.io.File
 
-@Serializable
 data class RegisterSession(
     val uuid: String,
-    var stage: RegisterStage
 )
 
 fun Application.configureSecurity() {
@@ -40,6 +38,6 @@ fun Application.configureSecurity() {
     }
 
     install(Sessions) {
-        headerFix<RegisterSession>("SS", directorySessionStorage(File(".sessions"))) { }
+        headerFix<RegisterSession>("SS", directorySessionStorage(File(".sessions"))) {}
     }
 }
