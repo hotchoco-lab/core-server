@@ -11,13 +11,13 @@ import org.hotchoco.core.model.ButtonModel
 import org.hotchoco.core.register.model.CountryModel
 import org.hotchoco.core.register.model.RegisterLevel
 import org.hotchoco.core.register.model.RegisterSession
-import org.hotchoco.core.register.model.TermsListModel
+import org.hotchoco.core.register.viewdata.TermsViewData
 import org.hotchoco.core.register.request.TermsRequest
 import org.hotchoco.core.register.response.AccountResponse
-import org.hotchoco.core.register.response.CountriesData
-import org.hotchoco.core.register.response.TermsResponse
+import org.hotchoco.core.register.model.CountriesModel
 import org.hotchoco.core.register.util.fallbackRegister
 import org.hotchoco.core.register.util.listTerms
+import org.hotchoco.core.register.viewdata.PhoneNumberViewData
 
 internal fun Route.routeRegisterTerms() {
     val registerLevelStorage = CoreHelper.registerLevelStorageGetter!!.invoke()
@@ -41,8 +41,8 @@ internal fun Route.routeRegisterTerms() {
                                     name = "확인",
                                     view = "terms",
                                     viewData = DefaultJson.encodeToJsonElement(
-                                        TermsListModel.serializer(),
-                                        TermsListModel(
+                                        TermsViewData.serializer(),
+                                        TermsViewData(
                                             terms = terms
                                         )
                                     )
@@ -70,8 +70,8 @@ internal fun Route.routeRegisterTerms() {
                 message = AccountResponse(
                     status = 0,
                     view = "phone-number",
-                    viewData = TermsResponse(
-                        countries = CountriesData.create(
+                    viewData = PhoneNumberViewData(
+                        countries = CountriesModel.create(
                             listOf(
                                 CountryModel(
                                     iso = "KR",

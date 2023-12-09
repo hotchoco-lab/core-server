@@ -9,7 +9,7 @@ import org.hotchoco.core.register.model.RegisterLevel
 import org.hotchoco.core.register.model.RegisterSession
 import org.hotchoco.core.register.request.PhoneNumberRequest
 import org.hotchoco.core.register.response.AccountResponse
-import org.hotchoco.core.register.response.PhoneNumberResponse
+import org.hotchoco.core.register.viewdata.PasscodeViewData
 import org.hotchoco.core.register.util.fallbackRegister
 
 internal fun Route.routeRegisterPhoneNumber() {
@@ -50,7 +50,7 @@ internal fun Route.routeRegisterPhoneNumber() {
                 AccountResponse(
                     status = 0,
                     view = "passcode",
-                    viewData = PhoneNumberResponse(
+                    viewData = PasscodeViewData(
                         methods = listOf("sms", "voice"),
                         phoneNumber = parsedPhoneNumber,
                         retryTime = 60,

@@ -8,7 +8,7 @@ import io.ktor.server.sessions.*
 import org.hotchoco.core.helper.CoreHelper
 import org.hotchoco.core.register.model.RegisterLevel
 import org.hotchoco.core.register.model.RegisterSession
-import org.hotchoco.core.register.model.TermsListModel
+import org.hotchoco.core.register.viewdata.TermsViewData
 import org.hotchoco.core.register.response.AccountResponse
 import org.hotchoco.core.register.util.listTerms
 
@@ -31,7 +31,7 @@ internal fun Route.routeRegisterNew() {
                 AccountResponse(
                     status = 0,
                     view = "terms",
-                    viewData = TermsListModel(
+                    viewData = TermsViewData(
                         terms = listTerms(application.environment.config)
                     )
                 )

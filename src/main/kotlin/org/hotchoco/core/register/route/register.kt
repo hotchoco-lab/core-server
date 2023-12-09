@@ -8,4 +8,5 @@ fun Route.routeRegister() {
     routeRegisterTerms()
     routeRegisterPhoneNumber()
     routeRegisterPasscode()
+    routeRegisterPassword()
 }

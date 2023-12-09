@@ -5,4 +5,5 @@ enum class RegisterLevel {
     TERMS,
     PHONE_NUMBER,
     PASSCODE,
+    PROFILE,
 }

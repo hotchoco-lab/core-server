@@ -5,39 +5,36 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.sessions.*
 import org.hotchoco.core.helper.CoreHelper
+import org.hotchoco.core.register.viewdata.ProfileViewData
 import org.hotchoco.core.register.model.RegisterLevel
 import org.hotchoco.core.register.model.RegisterSession
-import org.hotchoco.core.register.request.PasscodeRequest
+import org.hotchoco.core.register.request.PasswordRequest
 import org.hotchoco.core.register.response.AccountResponse
 import org.hotchoco.core.register.util.fallbackRegister
-import org.hotchoco.core.register.viewdata.PasswordViewData
 
-internal fun Route.routeRegisterPasscode() {
+internal fun Route.routeRegisterPassword() {
     val registerLevelStorage = CoreHelper.registerLevelStorageGetter!!.invoke()
-    val phoneNumberStorage = CoreHelper.phoneNumberStorageGetter!!.invoke()
 
     route("/android/account2") {
-        post<PasscodeRequest>("/passcode") {
+        post<PasswordRequest>("/password") {
             val session = call.sessions.get<RegisterSession>()
                 ?: return@post call.respond(fallbackRegister())
 
             try {
                 val currentLevel = registerLevelStorage.read(session.uuid)
 
-                if (currentLevel != RegisterLevel.PHONE_NUMBER.toString()) return@post call.respond(fallbackRegister())
+                if (currentLevel != RegisterLevel.PASSCODE.toString()) return@post call.respond(fallbackRegister())
             } catch (e: Throwable) {
                 return@post call.respond(fallbackRegister())
             }
 
-            registerLevelStorage.write(session.uuid, RegisterLevel.PASSCODE.toString())
+            registerLevelStorage.write(session.uuid, RegisterLevel.PROFILE.toString())
 
             call.respond(
                 AccountResponse(
                     status = 0,
-                    view = "password",
-                    viewData = PasswordViewData(
-                        phoneNumber = phoneNumberStorage[session.uuid] ?: return@post call.respond(fallbackRegister())
-                    )
+                    view = "profile",
+                    viewData = ProfileViewData()
                 )
             )
         }
