@@ -16,6 +16,7 @@ import org.hotchoco.core.register.request.TermsRequest
 import org.hotchoco.core.register.response.AccountResponse
 import org.hotchoco.core.register.response.CountriesData
 import org.hotchoco.core.register.response.TermsResponse
+import org.hotchoco.core.register.util.fallbackRegister
 import org.hotchoco.core.register.util.listTerms
 
 internal fun Route.routeRegisterTerms() {
@@ -53,59 +54,14 @@ internal fun Route.routeRegisterTerms() {
             }
 
             val session = call.sessions.get<RegisterSession>()
-                    ?: return@post call.respond(
-                        AccountResponse<Unit>(
-                            status = 0,
-                            message = "일시적인 오류로 처음으로 돌아갑니다. 다시 시도해 주세요.",
-                            alertData = AlertDataModel(
-                                title = null,
-                                message = "일시적인 오류로 처음으로 돌아갑니다. 다시 시도해 주세요.",
-                                buttons = listOf(
-                                    ButtonModel(
-                                        name = "확인",
-                                        view = "login"
-                                    )
-                                )
-                            )
-                        )
-                    )
+                    ?: return@post call.respond(fallbackRegister())
             
             try {
                 val currentLevel = registerLevelStorage.read(session.uuid)
 
-                if (currentLevel != RegisterLevel.NEW.toString()) return@post call.respond(
-                    AccountResponse<Unit>(
-                        status = 0,
-                        message = "일시적인 오류로 처음으로 돌아갑니다. 다시 시도해 주세요.",
-                        alertData = AlertDataModel(
-                            title = null,
-                            message = "일시적인 오류로 처음으로 돌아갑니다. 다시 시도해 주세요.",
-                            buttons = listOf(
-                                ButtonModel(
-                                    name = "확인",
-                                    view = "login"
-                                )
-                            )
-                        )
-                    )
-                )
+                if (currentLevel != RegisterLevel.NEW.toString()) return@post call.respond(fallbackRegister())
             } catch (e: Throwable) {
-                return@post call.respond(
-                    AccountResponse<Unit>(
-                        status = 0,
-                        message = "일시적인 오류로 처음으로 돌아갑니다. 다시 시도해 주세요.",
-                        alertData = AlertDataModel(
-                            title = null,
-                            message = "일시적인 오류로 처음으로 돌아갑니다. 다시 시도해 주세요.",
-                            buttons = listOf(
-                                ButtonModel(
-                                    name = "확인",
-                                    view = "login"
-                                )
-                            )
-                        )
-                    )
-                )
+                return@post call.respond(fallbackRegister())
             }
             
             registerLevelStorage.write(session.uuid, RegisterLevel.TERMS.toString())
