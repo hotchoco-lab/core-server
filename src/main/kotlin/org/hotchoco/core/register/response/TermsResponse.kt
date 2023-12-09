@@ -10,5 +10,6 @@ data class TermsResponse(
 
 @Serializable
 data class CountriesData(
-    val all: List<CountryModel> = listOf()
+    val all: List<CountryModel> = listOf(),
+    val recommended: List<CountryModel> = listOf()
 )

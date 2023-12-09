@@ -92,7 +92,14 @@ fun Route.routeRegister() {
                                     code = "82",
                                     name = "대한민국"
                                 )
-                            )
+                            ),
+                            recommended = listOf(
+                                CountryModel(
+                                    iso = "KR",
+                                    code = "82",
+                                    name = "대한민국"
+                                )
+                            ),
                         )
                     )
                 )
