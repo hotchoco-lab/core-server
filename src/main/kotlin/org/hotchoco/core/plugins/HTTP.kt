@@ -1,13 +1,10 @@
 package org.hotchoco.core.plugins
 
-import io.ktor.http.*
+import com.benasher44.uuid.uuid4
 import io.ktor.server.application.*
 import io.ktor.server.plugins.compression.*
-import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.plugins.defaultheaders.*
 import io.ktor.server.plugins.forwardedheaders.*
-import io.ktor.server.plugins.hsts.*
-import io.ktor.server.plugins.httpsredirect.*
 import io.ktor.server.plugins.openapi.*
 import io.ktor.server.plugins.partialcontent.*
 import io.ktor.server.plugins.swagger.*
@@ -37,6 +34,8 @@ fun Application.configureHTTP() {
 //    }
     install(DefaultHeaders) {
         header("X-Engine", "Ktor") // will send this header with each response
+        header("Kakao", "Talk")
+        header("C", uuid4().toString())
     }
     install(ForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy
     install(XForwardedHeaders) // WARNING: for security, do not include this if not behind a reverse proxy

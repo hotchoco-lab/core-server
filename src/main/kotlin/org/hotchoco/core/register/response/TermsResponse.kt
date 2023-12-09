@@ -12,4 +12,13 @@ data class TermsResponse(
 data class CountriesData(
     val all: List<CountryModel> = listOf(),
     val recommended: List<CountryModel> = listOf()
-)
+) {
+    companion object {
+        fun create(countries: List<CountryModel>): CountriesData {
+            return CountriesData(
+                all = countries,
+                recommended = countries
+            )
+        }
+    }
+}

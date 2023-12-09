@@ -46,6 +46,7 @@ internal fun <S : Any> SessionsConfig.headerFix(
             storage,
             builder.sessionIdProvider
         )
+
         else -> SessionTrackerByValue(sessionType, builder.serializer)
     }
     val provider = SessionProvider(name, sessionType, transport, tracker)

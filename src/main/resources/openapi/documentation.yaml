@@ -4,7 +4,7 @@ info:
   description: "core_server API"
   version: "1.0.0"
 servers:
-- url: "https://core_server"
+  - url: "https://core_server"
 paths:
   /:
     get:
@@ -97,11 +97,11 @@ paths:
     delete:
       description: "Delete city"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
       responses:
         "500":
           description: "Internal Server Error"
@@ -121,11 +121,11 @@ paths:
     get:
       description: "Read city"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
       responses:
         "500":
           description: "Internal Server Error"
@@ -153,11 +153,11 @@ paths:
     put:
       description: "Update city"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
       requestBody:
         content:
           '*/*':
@@ -201,11 +201,11 @@ paths:
     delete:
       description: "Delete user"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
       responses:
         "500":
           description: "Internal Server Error"
@@ -225,11 +225,11 @@ paths:
     get:
       description: "Read user"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
       responses:
         "500":
           description: "Internal Server Error"
@@ -255,11 +255,11 @@ paths:
     put:
       description: "Update user"
       parameters:
-      - name: "id"
-        in: "path"
-        required: true
-        schema:
-          type: "integer"
+        - name: "id"
+          in: "path"
+          required: true
+          schema:
+            type: "integer"
       requestBody:
         content:
           '*/*':
@@ -299,12 +299,12 @@ components:
   schemas:
     Map:
       type: "object"
-      properties: {}
+      properties: { }
     Map_String:
       type: "string"
     Function1:
       type: "object"
-      properties: {}
+      properties: { }
     Function1_? super HTML:
       type: "object"
     City:

@@ -6,13 +6,13 @@ import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.sessions.*
-import kotlinx.serialization.Serializable
-import org.hotchoco.core.register.model.RegisterStage
+import org.hotchoco.core.register.model.RegisterLevel
 import org.hotchoco.core.session.headerFix
 import java.io.File
 
 data class RegisterSession(
     val uuid: String,
+    val level: RegisterLevel
 )
 
 fun Application.configureSecurity() {
